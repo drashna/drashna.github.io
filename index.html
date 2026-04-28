@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Microcontroller Comparison for QMK Keyboards</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+                   Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+      background: #0d1117;
+      color: #c9d1d9;
+      margin: 0;
+      padding: 1.5rem;
+    }
+
+    h1 {
+      text-align: center;
+      font-size: 1.6rem;
+      color: #e6edf3;
+      margin-bottom: 0.25rem;
+    }
+
+    .subtitle {
+      text-align: center;
+      font-size: 0.875rem;
+      color: #8b949e;
+      margin-bottom: 1.5rem;
+    }
+
+    .table-wrapper {
+      overflow-x: auto;
+      border-radius: 6px;
+      border: 1px solid #30363d;
+    }
+
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      min-width: 900px;
+      font-size: 0.85rem;
+    }
+
+    thead tr {
+      background: #161b22;
+    }
+
+    thead th {
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+      color: #e6edf3;
+      border-bottom: 2px solid #30363d;
+      white-space: nowrap;
+    }
+
+    thead th:first-child {
+      min-width: 130px;
+    }
+
+    tbody tr:nth-child(even) {
+      background: #161b22;
+    }
+
+    tbody tr:nth-child(odd) {
+      background: #0d1117;
+    }
+
+    tbody tr:hover {
+      background: #1c2129;
+    }
+
+    td {
+      padding: 8px 14px;
+      border-bottom: 1px solid #21262d;
+      vertical-align: top;
+      line-height: 1.5;
+    }
+
+    td:first-child {
+      font-weight: 600;
+      color: #e6edf3;
+      white-space: nowrap;
+    }
+
+    a {
+      color: #58a6ff;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    .tag-full    { color: #3fb950; }
+    .tag-partial { color: #d29922; }
+    .tag-none    { color: #f85149; }
+
+    .notes {
+      margin-top: 1.25rem;
+      padding: 1rem 1.25rem;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      color: #8b949e;
+    }
+
+    .notes ul {
+      margin: 0;
+      padding-left: 1.25rem;
+    }
+
+    .notes li {
+      margin-bottom: 0.25rem;
+    }
+
+    .source {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.8rem;
+      color: #6e7681;
+    }
+  </style>
+</head>
+<body>
+  <h1>Microcontroller Comparison for QMK Keyboards</h1>
+  <p class="subtitle">A feature comparison of common MCUs used in custom keyboards</p>
+
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th></th>
+          <th>SN32F268</th>
+          <th>ATmega32U4</th>
+          <th>WeAct Blackpill<br>STM32F411</th>
+          <th>WeAct STM32F405</th>
+          <th>RP2040</th>
+          <th>Proton C<br>STM32F303xC</th>
+          <th>Nice Nano<br>(nRF52840)</th>
+          <th>STM32G0B1xx</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Speed</td>
+          <td>48 MHz</td>
+          <td>16 MHz</td>
+          <td>~96 MHz</td>
+          <td>~168 MHz</td>
+          <td>2× 133 MHz</td>
+          <td>72 MHz</td>
+          <td>64 MHz</td>
+          <td>64 MHz</td>
+        </tr>
+        <tr>
+          <td>Voltage</td>
+          <td>3.3 V</td>
+          <td>5 V</td>
+          <td>3.3 V with 5 V capable pins</td>
+          <td>3.3 V with 5 V capable pins</td>
+          <td>3.3 V</td>
+          <td>3.3 V with some 5 V capable pins</td>
+          <td>3.3 V</td>
+          <td>3.3 V with 5 V capable pins</td>
+        </tr>
+        <tr>
+          <td>Flash size</td>
+          <td>32 kB (~28 kB usable)</td>
+          <td>32 kB (28 kB usable)</td>
+          <td>512 kB</td>
+          <td>1 MB</td>
+          <td>Off-chip flash, up to 16 MB</td>
+          <td>256 kB</td>
+          <td>1 MB</td>
+          <td>128–512 kB</td>
+        </tr>
+        <tr>
+          <td>EEPROM size</td>
+          <td>Emulated</td>
+          <td>1 kB</td>
+          <td>Emulated (with SPI SOIC footprint)</td>
+          <td>Emulated</td>
+          <td>Emulated</td>
+          <td>Emulated</td>
+          <td>Emulated</td>
+          <td>Emulated</td>
+        </tr>
+        <tr>
+          <td>Memory (RAM)</td>
+          <td>2 kB</td>
+          <td>2.5 kB</td>
+          <td>128 kB</td>
+          <td>192 kB</td>
+          <td>264 kB</td>
+          <td>48 kB</td>
+          <td>256 kB</td>
+          <td>144 kB</td>
+        </tr>
+        <tr>
+          <td>Timers</td>
+          <td>2 total</td>
+          <td>4 total</td>
+          <td>11 total</td>
+          <td>11 total</td>
+          <td>9 total</td>
+          <td>10 total</td>
+          <td>8 total</td>
+          <td>10 total</td>
+        </tr>
+        <tr>
+          <td>Digital I/O</td>
+          <td>"up to 42" pins</td>
+          <td>25 pins</td>
+          <td>26 usable pins (more with caveats)</td>
+          <td>45 pins (more with caveats)</td>
+          <td>21</td>
+          <td>37 pins</td>
+          <td>30</td>
+          <td>30+ (depending on model)</td>
+        </tr>
+        <tr>
+          <td>Architecture</td>
+          <td>ARM Cortex-M0</td>
+          <td>AVR8 8-bit</td>
+          <td>ARM Cortex-M4</td>
+          <td>ARM Cortex-M4</td>
+          <td>ARM Cortex-M0+</td>
+          <td>ARM Cortex-M4</td>
+          <td>ARM Cortex-M4</td>
+          <td>ARM Cortex-M0</td>
+        </tr>
+        <tr>
+          <td>QMK Support</td>
+          <td><span class="tag-partial">Out of tree</span></td>
+          <td><span class="tag-full">Fully supported</span></td>
+          <td><span class="tag-full">Fully supported</span></td>
+          <td><span class="tag-full">Fully supported</span></td>
+          <td><span class="tag-full">Fully supported</span></td>
+          <td><span class="tag-full">Fully supported</span></td>
+          <td><span class="tag-none">No support due to highly restricted licensing</span></td>
+          <td><span class="tag-full">Fully supported</span></td>
+        </tr>
+        <tr>
+          <td>Cost</td>
+          <td>N/A</td>
+          <td>
+            <a href="https://www.digikey.com/en/products/detail/microchip-technology/ATMEGA32U4-AUR/2238241" target="_blank" rel="noopener">~$6 – Digikey</a>
+          </td>
+          <td>
+            <a href="https://www.digikey.com/en/products/detail/stmicroelectronics/stm32f411ret7/6621738" target="_blank" rel="noopener">~$6 – Digikey</a><br>
+            <a href="https://www.aliexpress.us/item/3256801269871873.html" target="_blank" rel="noopener">~$5 – AliExpress</a>
+          </td>
+          <td>
+            <a href="https://www.aliexpress.us/item/3256805865336384.html" target="_blank" rel="noopener">~$8 – AliExpress</a><br>
+            <a href="https://www.digikey.com/en/products/detail/stmicroelectronics/stm32f405rgt7/5051343" target="_blank" rel="noopener">$11 – Digikey</a>
+          </td>
+          <td>
+            <a href="https://www.digikey.com/en/products/detail/raspberry-pi/SC0914-13/14306010" target="_blank" rel="noopener">$1 – Digikey (chip)</a><br>
+            <a href="https://www.adafruit.com/product/5302" target="_blank" rel="noopener">$9 – Adafruit KB2040</a>
+          </td>
+          <td>
+            <a href="https://www.digikey.com/en/products/detail/stmicroelectronics/STM32F303CCT6/3660423" target="_blank" rel="noopener">~$8 – Digikey</a>
+          </td>
+          <td>
+            <a href="https://www.digikey.com/en/products/detail/nordic-semiconductor-asa/NRF52840-QIAA-R/7725407" target="_blank" rel="noopener">~$6 – Digikey (chip)</a><br>
+            <a href="https://nicekeyboards.com/nice-nano/#find-a-store" target="_blank" rel="noopener">~$25 – NiceNano board</a>
+          </td>
+          <td>
+            <a href="https://www.digikey.com/en/products/detail/stmicroelectronics/stm32g0b1cct6/18086132" target="_blank" rel="noopener">~$4.25 – Digikey</a>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="notes">
+    <ul>
+      <li>Emulated EEPROM uses program flash as EEPROM, reducing the total flash size.</li>
+      <li>All controllers support external EEPROM, via I²C or SPI.</li>
+      <li>RP2040 has 2 cores, but QMK will not leverage the second one, currently.</li>
+      <li>Prices are relative, and fluctuate.</li>
+    </ul>
+  </div>
+
+  <p class="source">
+    Source:
+    <a href="https://gist.github.com/drashna/9acf0368f9a2789fa12bdf749206969c" target="_blank" rel="noopener">
+      github.com/drashna — MCU comparison gist
+    </a>
+  </p>
+</body>
+</html>
